@@ -15,33 +15,10 @@ Resultando na sequência contígua `4159265358979323` com 16 dígitos.
 
 # Como funciona
 
-##### Parte 1 - Leitura de π
-
-1. Lê o arquivo `pi-1M.txt` e extrai apenas as casas decimais (descarta o `3.` inicial)
-
-##### Parte 2 - Verificação de primo
-
-1. Rejeita imediatamente strings vazias ou com zero à esquerda
-2. Testa divisibilidade do número por todos os inteiros de 2 até sua raiz quadrada
-3. Se nenhum dividir exatamente, o número é primo
-
-##### Parte 3 - Programação dinâmica
-
-1. Cria o array `dp[]` onde `dp[i]` guarda o início mais recuado de uma sequência que termina na posição `i`
-2. Inicializa todas as posições com `∞` (impossível) e `dp[0] = 0` como ponto de partida
-3. Para cada posição `i`, testa segmentos de 1 a 4 dígitos terminando ali
-4. Se o segmento for primo, avalia duas opções:
-    - **Opção A:** esse primo inicia uma sequência nova em `j`
-    - **Opção B:** esse primo estende uma sequência que já chegava em `j`, herdando seu início mais recuado
-5. Guarda sempre a opção que resulta no início mais recuado (sequência mais longa)
-6. Ao fim de cada posição, calcula o comprimento `i - dp[i]` e atualiza o melhor resultado global
-
-##### Parte 4 - Reconstrução da partição
-
-1. Localiza a posição final da melhor sequência (`bestEnd`)
-2. Segue os ponteiros `prev[]` de trás para frente até o início da sequência
-3. Inverte a lista para obter a ordem correta dos primos
-4. Imprime a partição encontrada
+1. O programa recebe o caminho de um arquivo com 1 milhão de casas decimais de π, lê o conteúdo e extrai apenas os dígitos após o ponto decimal.
+2. O núcleo do algoritmo é um array dp onde dp[i] guarda o maior comprimento de sequência contínua de primos que termina na posição i. Para cada posição, o algoritmo tenta formar um primo com 1 a 4 dígitos e atualiza o array caso encontre um resultado melhor.
+3. Ao final, o algoritmo percorre o dp buscando o maior valor. O uso de > em vez de >= garante que, em caso de empate, a sequência que começa mais cedo é escolhida — conforme exigido pelo enunciado. O trecho correspondente é extraído com pi.substring(melhorFim - melhorComp, melhorFim).
+4. A função ePrimo rejeita zeros à esquerda e números menores que 2, depois testa divisibilidade até a raiz quadrada do número — otimização clássica que reduz o número de verificações.
 
 # Tecnologias utilizadas
 

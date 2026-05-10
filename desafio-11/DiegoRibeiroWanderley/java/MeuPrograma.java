@@ -1,87 +1,56 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class MeuPrograma {
-  public static void main(String[] args) {
+
+  public static void main(String[] args) throws IOException {
     String casasDePi = getCasasDePi(args[0]);
-
-    encontrarNumerosPrimosEmPi(casasDePi);
+    System.out.println(encontrarMaiorSequencia(casasDePi));
   }
 
-  private static void encontrarNumerosPrimosEmPi(String casasDePi) {
-    int N = casasDePi.length();
+  private static String encontrarMaiorSequencia(String pi) {
+    int n = pi.length();
 
-    int[] dp = new int[N + 1];
-    int[] prev = new int[N + 1];
-    Arrays.fill(dp, Integer.MAX_VALUE);
-    Arrays.fill(prev, -1);
-    dp[0] = 0;
+    int[] dp = new int[n + 1];
 
-    int bestLen = 0, bestEnd = 0;
-
-    for (int i = 1; i <= N; i++) {
-      for (int t = 1; t <= 4 && t <= i; t++) {
-        int j = i - t;
-        String seg = casasDePi.substring(j, i);
-        if (!ePrimo(seg)) continue;
-
-        if (dp[i] == Integer.MAX_VALUE || j < dp[i]) {
-          dp[i] = j;
-          prev[i] = j;
-        }
-        if (dp[j] != Integer.MAX_VALUE && dp[j] < dp[i]) {
-          dp[i] = dp[j];
-          prev[i] = j;
-        }
-      }
-
-      if (dp[i] != Integer.MAX_VALUE) {
-        int len = i - dp[i];
-        if (len > bestLen) {
-          bestLen = len;
-          bestEnd = i;
+    for (int i = 0; i < n; i++) {
+      for (int tam = 1; tam <= 4 && i + tam <= n; tam++) {
+        String candidato = pi.substring(i, i + tam);
+        if (ePrimo(candidato)) {
+          int novoComp = dp[i] + tam;
+          if (novoComp > dp[i + tam]) {
+            dp[i + tam] = novoComp;
+          }
         }
       }
     }
 
-    List<String> melhorParticao = new ArrayList<>();
-    int i = bestEnd;
-    while (i > 0 && prev[i] != -1) {
-      int j = prev[i];
-      melhorParticao.add(casasDePi.substring(j, i));
-      i = j;
+    int melhorFim = -1;
+    int melhorComp = 0;
+    for (int i = 1; i <= n; i++) {
+      if (dp[i] > melhorComp) {
+        melhorComp = dp[i];
+        melhorFim = i;
+      }
     }
-    Collections.reverse(melhorParticao);
 
-    System.out.println(String.valueOf(melhorParticao).replaceAll("[\\[\\] ,]", ""));
+    if (melhorFim == -1) return "";
+    return pi.substring(melhorFim - melhorComp, melhorFim);
   }
 
-  private static String getCasasDePi(String caminho) {
-
-    String piCompleto = "";
-
+  private static String getCasasDePi(String caminho) throws IOException {
+    StringBuilder sb = new StringBuilder();
     try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
-      StringBuilder sb = new StringBuilder();
-
-      String linha = br.readLine();
-      while (linha != null) {
+      String linha;
+      while ((linha = br.readLine()) != null) {
         sb.append(linha);
-        linha = br.readLine();
       }
-      br.close();
-
-      piCompleto = sb.toString();
-    } catch (IOException e) {
-      e.printStackTrace();
     }
-
-    return piCompleto.split("\\.")[1];
+    return sb.toString().split("\\.")[1];
   }
 
   public static boolean ePrimo(String n) {
-    if (n.startsWith("0") || n.isEmpty()) return false;
+    if (n.isEmpty() || n.startsWith("0")) return false;
     long num = Long.parseLong(n);
     if (num < 2) return false;
     for (long i = 2; i * i <= num; i++) {
