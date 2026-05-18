@@ -1,21 +1,22 @@
-import java.util.List;
-import java.util.ArrayList;
-
 public class MeuPrograma {
   public static void main(String[] args) {
-    List<Integer> primos = new ArrayList<>();
+    int[] primos = new int[10000 + 1];
     for (int i = 2; i <= 10000; i++) {
-      primos.add(i);
+      primos[i] = i;
     }
 
-    for (int i = 2; i <= primos.size(); i++) {
-      if (i * i > 10000) {
-        break;
+    for (int i = 2; i * i <= 10000; i++) {
+      if (primos[i] != -1) {
+        for (int j = i * i; j <= 10000; j += i) {
+          primos[j] = -1;
+        }
       }
-      int finalI = i;
-      primos.removeIf(p -> p % finalI == 0 && p != finalI);
     }
 
-    primos.forEach(System.out::println);
+    for (int i = 2; i < 10000 - 2; i++) {
+      if (primos[i] != -1) {
+        System.out.println(primos[i]);
+      }
+    }
   }
 }
