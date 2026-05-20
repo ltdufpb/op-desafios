@@ -1,6 +1,7 @@
-package java;
-
 public class Primos {
+    private static boolean[] crivo;
+    private static final int MAX = 10000;
+
     public static boolean isPrimo(int num) {
         if(num < 2) {
             return false;
@@ -13,10 +14,24 @@ public class Primos {
         return true;
     }
     public static void main(String[] args) {
-        int limit = 10000;
-        for (int i = 1; i < limit; i++) {
-            if(Primos.isPrimo(i)) {
+        gerarCrivo();
+        for (int i = 2; i <= MAX; i++) {
+            if (isPrimo(i)) {
                 System.out.println(i);
+            }
+        }
+    }
+
+    public static void gerarCrivo() {
+        crivo = new boolean[MAX + 1];
+        for (int i = 2; i <= MAX; i++) {
+            crivo[i] = true;
+        }
+        for (int i = 2; (long) i * i <= MAX; i++) {
+            if (crivo[i]) {
+                for (int j = i * i; j <= MAX; j += i) {
+                    crivo[j] = false;
+                }
             }
         }
     }

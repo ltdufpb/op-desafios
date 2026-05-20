@@ -2,9 +2,10 @@
 
 ## Solução
 
-Foi criada uma função, que retorna um valor booleano indicando se o número é primo ou não.
-A verificação é feita utilizando divisões sucessivas entre `2` e o número informado. Caso exista alguma divisão exata, o número não é primo.
-
+Foi utilizado o Crivo de Eratóstenes para todos os números primos
+até 10000. O crivo inicializa um array booleano marcando todos os índices como
+verdadeiro e itera marcando os múltiplos de cada primo como falso,
+resultando em uma consulta O(1) para verificar se um número é primo.
 ## executar
 
 ```bash
