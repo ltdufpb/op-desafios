@@ -1,21 +1,44 @@
-# Desafio 03
+# Desafio 03 - Numeros palindromos
 
-## Informações sobre a implementação
+Solucao do desafio 03 do grupo [OsProgramadores](https://osprogramadores.com/desafios/).
 
-Esta solução lê um número inicial e um número final.
+## Autora
 
-Depois disso, percorre todos os valores dentro desse intervalo e verifica se cada
-número continua igual quando seus dígitos são invertidos.
+Juliana - [ju-caju](https://github.com/ju-caju)
 
-A verificação é feita apenas com operações matemáticas. O programa pega o último
-dígito com o resto da divisão por 10, monta o número invertido e remove o último
-dígito do número original usando divisão inteira.
+## Sobre o desafio
 
-Quando isso acontece, o número é considerado palíndromo e é impresso na tela.
+O objetivo deste desafio e listar todos os numeros palindromos dentro de um
+intervalo informado pelo usuario.
 
-## Como rodar o exercício
+Um numero palindromo e um numero que permanece igual quando seus digitos sao
+lidos da direita para a esquerda. Por exemplo, `121`, `1331` e `7` sao
+palindromos.
 
-Entre na pasta da solução:
+## Como a solucao funciona
+
+A implementacao le dois valores informados pelo usuario: o numero inicial e o
+numero final do intervalo.
+
+Em seguida, percorre todos os numeros dentro desse intervalo e verifica se cada
+um deles e palindromo usando apenas operacoes matematicas, sem transformar o
+numero em texto.
+
+Para fazer essa verificacao, o programa pega o ultimo digito com o resto da
+divisao por 10, monta o numero invertido e remove o ultimo digito do numero
+original usando divisao inteira.
+
+Ao final, o programa imprime todos os numeros que sao iguais ao seu valor
+invertido.
+
+## Requisitos
+
+- Python 3.x
+- Nenhuma biblioteca externa e necessaria
+
+## Como executar
+
+Entre na pasta da solucao:
 
 ```bash
 cd desafio-03/ju-caju/python
@@ -29,20 +52,46 @@ python3 resposta.py
 
 O programa vai pedir:
 
-- número inicial
-- número final
+- numero inicial
+- numero final
 
-## Como instalar o Python
+## Saida esperada
 
-Se o Python 3 já estiver instalado, você pode confirmar com:
+O programa imprime um numero palindromo por linha, considerando o intervalo
+informado pelo usuario.
 
-```bash
-python3 --version
+Exemplo usando o intervalo de `1` ate `150`:
+
+```text
+1
+2
+3
+4
+5
+6
+7
+8
+9
+11
+22
+33
+44
+55
+66
+77
+88
+99
+101
+111
+121
+131
+141
 ```
 
-Se não estiver instalado, no Ubuntu ou Debian rode:
+## Estrutura dos arquivos
 
-```bash
-sudo apt update
-sudo apt install python3
+```text
+desafio-03/ju-caju/python/
+├── README.md
+└── resposta.py
 ```
