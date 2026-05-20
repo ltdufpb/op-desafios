@@ -4,7 +4,12 @@
 
 Esta solução lê um número inicial e um número final.
 
-Depois disso, percorre todos os valores dentro desse intervalo e transforma cada número em texto para verificar se ele continua igual quando lido de trás para frente.
+Depois disso, percorre todos os valores dentro desse intervalo e verifica se cada
+número continua igual quando seus dígitos são invertidos.
+
+A verificação é feita apenas com operações matemáticas. O programa pega o último
+dígito com o resto da divisão por 10, monta o número invertido e remove o último
+dígito do número original usando divisão inteira.
 
 Quando isso acontece, o número é considerado palíndromo e é impresso na tela.
 
