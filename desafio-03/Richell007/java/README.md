@@ -1,4 +1,4 @@
-# Desafio 02 - Numeros Palindromicos
+# Desafio 03 - Numeros Palindromicos
  
 ## Descricao
  
@@ -12,7 +12,8 @@ Java (OpenJDK 17)
 ## Como executar
  
 ### Compilar
-
+ 
+```bash
 javac DesafioPalindromico.java
 
  
